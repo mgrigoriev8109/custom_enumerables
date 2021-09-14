@@ -1,10 +1,10 @@
 module Enumerable
-    def my_each
-      # your code here
-    end
+  def my_each(&my_block)
+    myblock.call
   end
+end
 
-puts "my_each vs. each"
+puts "my_each and each"
 numbers = [1, 2, 3, 4, 5]
 numbers.my_each  { |item| puts item }
 numbers.each  { |item| puts item }
