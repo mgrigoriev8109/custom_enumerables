@@ -31,10 +31,26 @@ module Enumerable
     else
       puts self
     end
-  end    
+  end
+
+  def my_all?
+    if block_given?
+      for element in self do
+        return false if (yield element) == true
+        return true if (yield element) == false
+      end
+    else
+      puts self
+    end
+  end
+
+  def my_any?
+
+  end
 end
 
-p "my_each and each"
-numbers = [1, 2, 3, 4, 5]
-p numbers.my_select  { |item|  item.even? }
-p numbers.select  { |item|  item.even? }
+words = ['ant', 'bear', 'c']
+p "test1"
+p words.my_all? { |word| word.length >= 2  }
+p "test2"
+p words.all? { |word| word.length >= 2}
