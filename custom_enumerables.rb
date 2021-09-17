@@ -34,23 +34,37 @@ module Enumerable
   end
 
   def my_all?
+    return_value = true
     if block_given?
       for element in self do
-        return false if (yield element) == true
-        return true if (yield element) == false
+        if (yield element) == false
+          return_value = false
+        end
       end
+      return_value
     else
       puts self
     end
   end
 
   def my_any?
-
+    return_value = false
+    if block_given?
+      for element in self do
+        if (yield element) == true
+          return_value = true
+        end
+      end
+      return_value
+    else
+      puts self
+    end
   end
+
 end
 
-words = ['ant', 'bear', 'c']
+words = ['ant', 'b', 'cear']
 p "test1"
-p words.my_all? { |word| word.length >= 2  }
+p words.my_any? { |word| word.length >= 5  }
 p "test2"
-p words.all? { |word| word.length >= 2}
+p words.any? { |word| word.length >= 5}
