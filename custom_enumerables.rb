@@ -100,11 +100,23 @@ module Enumerable
       puts self
     end
   end
+
+  def my_inject
+    accumulator = self[0]
+    if block_given?
+      for element in self[1..-1] do
+        accumulator = yield(accumulator, element)
+      end
+      accumulator
+    else
+      puts self
+    end
+  end
   
 end
 
-words = [1, 2, 3, 4]
+words = [2, 4, 5]
 p "test1"
-p words.my_map { |number| number * number }
+p words.my_inject { |accumulator, number| accumulator * number }
 p "test2"
-p words.map { |number| number * number }
+p words.inject { |accumulator, number| accumulator * number }
