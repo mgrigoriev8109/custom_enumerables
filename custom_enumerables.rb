@@ -61,10 +61,38 @@ module Enumerable
     end
   end
 
+  def my_none?
+    return_value = true
+    if block_given?
+      for element in self do
+        if (yield element) == true
+          return_value = false
+        end
+      end
+      return_value
+    else
+      puts self
+    end
+  end
+
+  def my_count
+    return_count = 0
+    if block_given?
+      for element in self do
+        if (yield element) == true
+          return_count += 1
+        end
+      end
+      return_count
+    else
+      puts self
+    end
+  end
+
 end
 
-words = ['ant', 'b', 'cear']
+words = [1, 2, 3, 4]
 p "test1"
-p words.my_any? { |word| word.length >= 5  }
+p words.my_count { |number| number > 1 }
 p "test2"
-p words.any? { |word| word.length >= 5}
+p words.count { |number| number > 1 }
