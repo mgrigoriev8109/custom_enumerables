@@ -115,8 +115,12 @@ module Enumerable
   
 end
 
+def multiply_els(array)
+  p array.my_inject { |accumulator, number| accumulator * number }
+end
+
 words = [2, 4, 5]
 p "test1"
-p words.my_inject { |accumulator, number| accumulator * number }
+multiply_els(words)
 p "test2"
 p words.inject { |accumulator, number| accumulator * number }
