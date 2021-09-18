@@ -89,16 +89,19 @@ module Enumerable
     end
   end
 
-  def my_map
+  def my_map(proc_argument)
+    
     new_array=[]
     if block_given?
       for element in self do
-        new_array.push(yield element)
+        new_array.push(yield(element))
       end
-      new_array
     else
-      puts self
+      for element in self do
+        new_array.push(proc_argument.call(element))
+      end
     end
+    new_array
   end
 
   def my_inject
@@ -116,11 +119,13 @@ module Enumerable
 end
 
 def multiply_els(array)
-  p array.my_inject { |accumulator, number| accumulator * number }
+  array.my_inject { |accumulator, number| accumulator * number }
 end
+
+map_proc = Proc.new  { |i| i*i }
 
 words = [2, 4, 5]
 p "test1"
-multiply_els(words)
+p words.my_map { |i| i*i } 
 p "test2"
-p words.inject { |accumulator, number| accumulator * number }
+p words.map { |i| i*i } 
