@@ -89,16 +89,13 @@ module Enumerable
     end
   end
 
-  def my_map(proc_argument)
-    
+  def my_map(proc_argument = false)
     new_array=[]
-    if block_given?
-      for element in self do
-        new_array.push(yield(element))
-      end
-    else
-      for element in self do
+    for element in self do
+      if proc_argument
         new_array.push(proc_argument.call(element))
+      else
+        new_array.push(yield(element))
       end
     end
     new_array
@@ -126,6 +123,5 @@ map_proc = Proc.new  { |i| i*i }
 
 words = [2, 4, 5]
 p "test1"
-p words.my_map { |i| i*i } 
-p "test2"
+p words.my_map(map_proc)
 p words.map { |i| i*i } 
